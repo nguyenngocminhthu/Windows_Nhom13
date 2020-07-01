@@ -1,0 +1,40 @@
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\LabManagement.exe.config
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\LabManagement.exe
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\LabManagement.pdb
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.csprojAssemblyReference.cache
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.FrmMember.resources
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.FrmProject.resources
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.FrmWork.resources
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.Properties.Resources.resources
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.exe
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.pdb
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.FrmMainGUI.resources
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\EntityFramework.dll
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\EntityFramework.xml
+C:\Users\PC\Desktop\LabManagement\LabManagement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.csproj.CopyComplete
+C:\Users\PC\Desktop\LabManagement\LabManagement\obj\Debug\LabManagement.Views.FrmListOfWork.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.csprojAssemblyReference.cache
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.FrmMainGUI.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.FrmMember.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.FrmProject.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.FrmWork.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.Properties.Resources.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.Views.FrmListOfWork.resources
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.csproj.GenerateResource.cache
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.exe
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.pdb
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\LabManagement.exe.config
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\LabManagement.exe
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\LabManagement.pdb
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\EntityFramework.dll
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\EntityFramework.xml
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\obj\Debug\LabManagement.csproj.CopyComplete
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\System.IO.Packaging.dll
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\PC\Documents\Zalo Received Files\LabManagement\LabManagement\bin\Debug\System.IO.Packaging.xml

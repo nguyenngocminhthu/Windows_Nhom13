@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LabMangementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ListOfWork">
+    <Key>
+      <PropertyRef Name="no" />
+    </Key>
+    <Property Name="no" Type="Int32" Nullable="false" />
+    <Property Name="job" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Projects" Relationship="Self.ProjectListOfWork" FromRole="ListOfWorks" ToRole="Projects" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="memcode" />
+    </Key>
+    <Property Name="memcode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="memname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="birthday" Type="DateTime" Precision="3" />
+    <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="phonenum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Works" Relationship="Self.MemberWork" FromRole="Members" ToRole="Works" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Public" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="procode" />
+    </Key>
+    <Property Name="procode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="proname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="fromdate" Type="DateTime" Precision="3" />
+    <Property Name="todate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ListOfWorks" Relationship="Self.ProjectListOfWork" FromRole="Projects" ToRole="ListOfWorks" />
+    <NavigationProperty Name="Works" Relationship="Self.WorkProject" FromRole="Projects" ToRole="Works" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="workingtime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="salary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Members" Relationship="Self.MemberWork" FromRole="Works" ToRole="Members" />
+    <NavigationProperty Name="Projects" Relationship="Self.WorkProject" FromRole="Works" ToRole="Projects" />
+  </EntityType>
+  <Association Name="MemberWork">
+    <End Role="Members" Type="Self.Member" Multiplicity="*" />
+    <End Role="Works" Type="Self.Work" Multiplicity="*" />
+  </Association>
+  <Association Name="ProjectListOfWork">
+    <End Role="ListOfWorks" Type="Self.ListOfWork" Multiplicity="*" />
+    <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+  </Association>
+  <Association Name="WorkProject">
+    <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+    <End Role="Works" Type="Self.Work" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="LabMangementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ListOfWorks" EntityType="Self.ListOfWork" />
+    <EntitySet Name="Members" EntityType="Self.Member" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="Works" EntityType="Self.Work" />
+    <AssociationSet Name="MemberWork" Association="Self.MemberWork">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+    <AssociationSet Name="ProjectListOfWork" Association="Self.ProjectListOfWork">
+      <End Role="ListOfWorks" EntitySet="ListOfWorks" />
+      <End Role="Projects" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="WorkProject" Association="Self.WorkProject">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="Works" EntitySet="Works" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

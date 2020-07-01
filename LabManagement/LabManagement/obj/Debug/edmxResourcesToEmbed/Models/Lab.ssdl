@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LabMangementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ListOfWorks">
+    <Key>
+      <PropertyRef Name="no" />
+    </Key>
+    <Property Name="no" Type="int" Nullable="false" />
+    <Property Name="job" Type="nvarchar(max)" />
+    <Property Name="status" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="memcode" />
+    </Key>
+    <Property Name="memcode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="memname" Type="nchar" MaxLength="10" />
+    <Property Name="gender" Type="nvarchar(max)" />
+    <Property Name="birthday" Type="datetime" />
+    <Property Name="address" Type="nvarchar(max)" />
+    <Property Name="phonenum" Type="nvarchar(max)" />
+    <Property Name="email" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="MemberWork">
+    <Key>
+      <PropertyRef Name="Member_memcode" />
+      <PropertyRef Name="Works_ID" />
+    </Key>
+    <Property Name="Member_memcode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Works_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProjectListOfWork">
+    <Key>
+      <PropertyRef Name="Project_procode" />
+      <PropertyRef Name="ListOfWorks_no" />
+    </Key>
+    <Property Name="Project_procode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="ListOfWorks_no" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projects">
+    <Key>
+      <PropertyRef Name="procode" />
+    </Key>
+    <Property Name="procode" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="proname" Type="nvarchar(max)" />
+    <Property Name="description" Type="nvarchar(max)" />
+    <Property Name="fromdate" Type="datetime" />
+    <Property Name="todate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WorkProject">
+    <Key>
+      <PropertyRef Name="Work_ID" />
+      <PropertyRef Name="Projects_procode" />
+    </Key>
+    <Property Name="Work_ID" Type="int" Nullable="false" />
+    <Property Name="Projects_procode" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Works">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="workingtime" Type="nvarchar(max)" />
+    <Property Name="salary" Type="nvarchar(max)" />
+  </EntityType>
+  <Association Name="FK_MemberWork_Member">
+    <End Role="Members" Type="Self.Members" Multiplicity="1" />
+    <End Role="MemberWork" Type="Self.MemberWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="memcode" />
+      </Principal>
+      <Dependent Role="MemberWork">
+        <PropertyRef Name="Member_memcode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberWork_Work">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="MemberWork" Type="Self.MemberWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MemberWork">
+        <PropertyRef Name="Works_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectListOfWork_ListOfWork">
+    <End Role="ListOfWorks" Type="Self.ListOfWorks" Multiplicity="1" />
+    <End Role="ProjectListOfWork" Type="Self.ProjectListOfWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ListOfWorks">
+        <PropertyRef Name="no" />
+      </Principal>
+      <Dependent Role="ProjectListOfWork">
+        <PropertyRef Name="ListOfWorks_no" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectListOfWork_Project">
+    <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+    <End Role="ProjectListOfWork" Type="Self.ProjectListOfWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="procode" />
+      </Principal>
+      <Dependent Role="ProjectListOfWork">
+        <PropertyRef Name="Project_procode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkProject_Project">
+    <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+    <End Role="WorkProject" Type="Self.WorkProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projects">
+        <PropertyRef Name="procode" />
+      </Principal>
+      <Dependent Role="WorkProject">
+        <PropertyRef Name="Projects_procode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkProject_Work">
+    <End Role="Works" Type="Self.Works" Multiplicity="1" />
+    <End Role="WorkProject" Type="Self.WorkProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Works">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="WorkProject">
+        <PropertyRef Name="Work_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="LabMangementModelStoreContainer">
+    <EntitySet Name="ListOfWorks" EntityType="Self.ListOfWorks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MemberWork" EntityType="Self.MemberWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectListOfWork" EntityType="Self.ProjectListOfWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkProject" EntityType="Self.WorkProject" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MemberWork_Member" Association="Self.FK_MemberWork_Member">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="MemberWork" EntitySet="MemberWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberWork_Work" Association="Self.FK_MemberWork_Work">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="MemberWork" EntitySet="MemberWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectListOfWork_ListOfWork" Association="Self.FK_ProjectListOfWork_ListOfWork">
+      <End Role="ListOfWorks" EntitySet="ListOfWorks" />
+      <End Role="ProjectListOfWork" EntitySet="ProjectListOfWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectListOfWork_Project" Association="Self.FK_ProjectListOfWork_Project">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="ProjectListOfWork" EntitySet="ProjectListOfWork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkProject_Project" Association="Self.FK_WorkProject_Project">
+      <End Role="Projects" EntitySet="Projects" />
+      <End Role="WorkProject" EntitySet="WorkProject" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WorkProject_Work" Association="Self.FK_WorkProject_Work">
+      <End Role="Works" EntitySet="Works" />
+      <End Role="WorkProject" EntitySet="WorkProject" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

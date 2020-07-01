@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LabMangementModelStoreContainer" CdmEntityContainer="LabMangementEntities">
+    <EntitySetMapping Name="ListOfWorks">
+      <EntityTypeMapping TypeName="LabMangementModel.ListOfWork">
+        <MappingFragment StoreEntitySet="ListOfWorks">
+          <ScalarProperty Name="no" ColumnName="no" />
+          <ScalarProperty Name="job" ColumnName="job" />
+          <ScalarProperty Name="status" ColumnName="status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="LabMangementModel.Member">
+        <MappingFragment StoreEntitySet="Members">
+          <ScalarProperty Name="memcode" ColumnName="memcode" />
+          <ScalarProperty Name="memname" ColumnName="memname" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="birthday" ColumnName="birthday" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phonenum" ColumnName="phonenum" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="LabMangementModel.Project">
+        <MappingFragment StoreEntitySet="Projects">
+          <ScalarProperty Name="procode" ColumnName="procode" />
+          <ScalarProperty Name="proname" ColumnName="proname" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="fromdate" ColumnName="fromdate" />
+          <ScalarProperty Name="todate" ColumnName="todate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="LabMangementModel.Work">
+        <MappingFragment StoreEntitySet="Works">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="workingtime" ColumnName="workingtime" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MemberWork" TypeName="LabMangementModel.MemberWork" StoreEntitySet="MemberWork">
+      <EndProperty Name="Members">
+        <ScalarProperty Name="memcode" ColumnName="Member_memcode" />
+      </EndProperty>
+      <EndProperty Name="Works">
+        <ScalarProperty Name="ID" ColumnName="Works_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProjectListOfWork" TypeName="LabMangementModel.ProjectListOfWork" StoreEntitySet="ProjectListOfWork">
+      <EndProperty Name="ListOfWorks">
+        <ScalarProperty Name="no" ColumnName="ListOfWorks_no" />
+      </EndProperty>
+      <EndProperty Name="Projects">
+        <ScalarProperty Name="procode" ColumnName="Project_procode" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="WorkProject" TypeName="LabMangementModel.WorkProject" StoreEntitySet="WorkProject">
+      <EndProperty Name="Projects">
+        <ScalarProperty Name="procode" ColumnName="Projects_procode" />
+      </EndProperty>
+      <EndProperty Name="Works">
+        <ScalarProperty Name="ID" ColumnName="Work_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

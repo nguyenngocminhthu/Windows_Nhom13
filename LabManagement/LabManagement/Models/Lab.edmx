@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LabMangementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ListOfWorks">
+          <Key>
+            <PropertyRef Name="no" />
+          </Key>
+          <Property Name="no" Type="int" Nullable="false" />
+          <Property Name="job" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="memcode" />
+          </Key>
+          <Property Name="memcode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="memname" Type="nchar" MaxLength="10" />
+          <Property Name="gender" Type="nvarchar(max)" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="phonenum" Type="nvarchar(max)" />
+          <Property Name="email" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MemberWork">
+          <Key>
+            <PropertyRef Name="Member_memcode" />
+            <PropertyRef Name="Works_ID" />
+          </Key>
+          <Property Name="Member_memcode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Works_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProjectListOfWork">
+          <Key>
+            <PropertyRef Name="Project_procode" />
+            <PropertyRef Name="ListOfWorks_no" />
+          </Key>
+          <Property Name="Project_procode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="ListOfWorks_no" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="procode" />
+          </Key>
+          <Property Name="procode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="proname" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="fromdate" Type="datetime" />
+          <Property Name="todate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WorkProject">
+          <Key>
+            <PropertyRef Name="Work_ID" />
+            <PropertyRef Name="Projects_procode" />
+          </Key>
+          <Property Name="Work_ID" Type="int" Nullable="false" />
+          <Property Name="Projects_procode" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Works">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="workingtime" Type="nvarchar(max)" />
+          <Property Name="salary" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_MemberWork_Member">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MemberWork" Type="Self.MemberWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="memcode" />
+            </Principal>
+            <Dependent Role="MemberWork">
+              <PropertyRef Name="Member_memcode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberWork_Work">
+          <End Role="Works" Type="Self.Works" Multiplicity="1" />
+          <End Role="MemberWork" Type="Self.MemberWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MemberWork">
+              <PropertyRef Name="Works_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectListOfWork_ListOfWork">
+          <End Role="ListOfWorks" Type="Self.ListOfWorks" Multiplicity="1" />
+          <End Role="ProjectListOfWork" Type="Self.ProjectListOfWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListOfWorks">
+              <PropertyRef Name="no" />
+            </Principal>
+            <Dependent Role="ProjectListOfWork">
+              <PropertyRef Name="ListOfWorks_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectListOfWork_Project">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="ProjectListOfWork" Type="Self.ProjectListOfWork" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="procode" />
+            </Principal>
+            <Dependent Role="ProjectListOfWork">
+              <PropertyRef Name="Project_procode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkProject_Project">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1" />
+          <End Role="WorkProject" Type="Self.WorkProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="procode" />
+            </Principal>
+            <Dependent Role="WorkProject">
+              <PropertyRef Name="Projects_procode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkProject_Work">
+          <End Role="Works" Type="Self.Works" Multiplicity="1" />
+          <End Role="WorkProject" Type="Self.WorkProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Works">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="WorkProject">
+              <PropertyRef Name="Work_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LabMangementModelStoreContainer">
+          <EntitySet Name="ListOfWorks" EntityType="Self.ListOfWorks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberWork" EntityType="Self.MemberWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectListOfWork" EntityType="Self.ProjectListOfWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkProject" EntityType="Self.WorkProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Works" EntityType="Self.Works" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MemberWork_Member" Association="Self.FK_MemberWork_Member">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberWork" EntitySet="MemberWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberWork_Work" Association="Self.FK_MemberWork_Work">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="MemberWork" EntitySet="MemberWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectListOfWork_ListOfWork" Association="Self.FK_ProjectListOfWork_ListOfWork">
+            <End Role="ListOfWorks" EntitySet="ListOfWorks" />
+            <End Role="ProjectListOfWork" EntitySet="ProjectListOfWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectListOfWork_Project" Association="Self.FK_ProjectListOfWork_Project">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="ProjectListOfWork" EntitySet="ProjectListOfWork" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkProject_Project" Association="Self.FK_WorkProject_Project">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="WorkProject" EntitySet="WorkProject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkProject_Work" Association="Self.FK_WorkProject_Work">
+            <End Role="Works" EntitySet="Works" />
+            <End Role="WorkProject" EntitySet="WorkProject" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LabMangementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ListOfWork">
+          <Key>
+            <PropertyRef Name="no" />
+          </Key>
+          <Property Name="no" Type="Int32" Nullable="false" />
+          <Property Name="job" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Projects" Relationship="Self.ProjectListOfWork" FromRole="ListOfWorks" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="memcode" />
+          </Key>
+          <Property Name="memcode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="memname" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phonenum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Works" Relationship="Self.MemberWork" FromRole="Members" ToRole="Works" a:GetterAccess="Public" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" a:SetterAccess="Public" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="procode" />
+          </Key>
+          <Property Name="procode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="proname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fromdate" Type="DateTime" Precision="3" />
+          <Property Name="todate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ListOfWorks" Relationship="Self.ProjectListOfWork" FromRole="Projects" ToRole="ListOfWorks" />
+          <NavigationProperty Name="Works" Relationship="Self.WorkProject" FromRole="Projects" ToRole="Works" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="workingtime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="salary" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Members" Relationship="Self.MemberWork" FromRole="Works" ToRole="Members" />
+          <NavigationProperty Name="Projects" Relationship="Self.WorkProject" FromRole="Works" ToRole="Projects" />
+        </EntityType>
+        <Association Name="MemberWork">
+          <End Role="Members" Type="Self.Member" Multiplicity="*" />
+          <End Role="Works" Type="Self.Work" Multiplicity="*" />
+        </Association>
+        <Association Name="ProjectListOfWork">
+          <End Role="ListOfWorks" Type="Self.ListOfWork" Multiplicity="*" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+        </Association>
+        <Association Name="WorkProject">
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <End Role="Works" Type="Self.Work" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="LabMangementEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ListOfWorks" EntityType="Self.ListOfWork" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Works" EntityType="Self.Work" />
+          <AssociationSet Name="MemberWork" Association="Self.MemberWork">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+          <AssociationSet Name="ProjectListOfWork" Association="Self.ProjectListOfWork">
+            <End Role="ListOfWorks" EntitySet="ListOfWorks" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="WorkProject" Association="Self.WorkProject">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Works" EntitySet="Works" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LabMangementModelStoreContainer" CdmEntityContainer="LabMangementEntities">
+          <EntitySetMapping Name="ListOfWorks">
+            <EntityTypeMapping TypeName="LabMangementModel.ListOfWork">
+              <MappingFragment StoreEntitySet="ListOfWorks">
+                <ScalarProperty Name="no" ColumnName="no" />
+                <ScalarProperty Name="job" ColumnName="job" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="LabMangementModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="memcode" ColumnName="memcode" />
+                <ScalarProperty Name="memname" ColumnName="memname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phonenum" ColumnName="phonenum" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="LabMangementModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="procode" ColumnName="procode" />
+                <ScalarProperty Name="proname" ColumnName="proname" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="fromdate" ColumnName="fromdate" />
+                <ScalarProperty Name="todate" ColumnName="todate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Works">
+            <EntityTypeMapping TypeName="LabMangementModel.Work">
+              <MappingFragment StoreEntitySet="Works">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="workingtime" ColumnName="workingtime" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="MemberWork" TypeName="LabMangementModel.MemberWork" StoreEntitySet="MemberWork">
+            <EndProperty Name="Members">
+              <ScalarProperty Name="memcode" ColumnName="Member_memcode" />
+            </EndProperty>
+            <EndProperty Name="Works">
+              <ScalarProperty Name="ID" ColumnName="Works_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProjectListOfWork" TypeName="LabMangementModel.ProjectListOfWork" StoreEntitySet="ProjectListOfWork">
+            <EndProperty Name="ListOfWorks">
+              <ScalarProperty Name="no" ColumnName="ListOfWorks_no" />
+            </EndProperty>
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="procode" ColumnName="Project_procode" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="WorkProject" TypeName="LabMangementModel.WorkProject" StoreEntitySet="WorkProject">
+            <EndProperty Name="Projects">
+              <ScalarProperty Name="procode" ColumnName="Projects_procode" />
+            </EndProperty>
+            <EndProperty Name="Works">
+              <ScalarProperty Name="ID" ColumnName="Work_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
